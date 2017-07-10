@@ -10,7 +10,7 @@ class PortfoliosController < ApplicationController
    def update
     respond_to do |format|
       if @blog.update(blog_params)
-        format.html { redirect_to @blog, notice: 'Your blog is now live.'
+        format.html { redirect_to @blog, notice: 'Your blog is now live.'}
       else
         format.html { render :edit }
       end
@@ -31,7 +31,7 @@ end
     end
   end
   
-  <% @blogs.each do |blog| %>
+  <% @blog.each do %>
       <tr>
         <td><%= blog.title %></td>
         <td><%= blog.body %></td>

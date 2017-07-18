@@ -1,42 +1,60 @@
-class PortfoliosController < ApplicationController 
+class PortfoliosController < ApplicationController
   def index
-    @portfolio_items=Portfolio.all
+    @portfolio_items = Portfolio.all
   end
-  
-  
+
+  def angular
+    @angular_portfolio_items = Portfolio.angular
+  end
+
   def new
-    @portfolio_items = Portfolio.new
+    @portfolio_item = Portfolio.new
+    3.times { @portfolio_item.technologies.build }
   end
-   def update
+
+  def create
+    @portfolio_item = Portfolio.new(params.require(:portfolio).permit(:title, :subtitle, :body, technologies_attributes: [:name]))
+
     respond_to do |format|
-      if @blog.update(blog_params)
-        format.html { redirect_to @blog, notice: 'Your blog is now live.'}
+      if @portfolio_item.save
+        format.html { redirect_to portfolios_path, notice: 'Your portfolio item is now live.' }
+      else
+        format.html { render :new }
+      end
+    end
+  end
+
+  def edit
+    @portfolio_item = Portfolio.find(params[:id])
+  end
+
+  def update
+    @portfolio_item = Portfolio.find(params[:id])
+
+    respond_to do |format|
+      if @portfolio_item.update(params.require(:portfolio).permit(:title, :subtitle, :body))
+        format.html { redirect_to portfolios_path, notice: 'The record successfully updated.' }
       else
         format.html { render :edit }
       end
     end
   end
-  
-  def edit 
-  end 
-  #Destroy/delete the record
-  @portfolio_items= Portfolio.find(params{:id})
-  
-end
-# Redirect
- def destroy
-    @blog.destroy
+
+  def show
+    @portfolio_item = Portfolio.find(params[:id])
+  end
+
+  def destroy
+    # Perform the lookup
+    @portfolio_item = Portfolio.find(params[:id])
+
+    # Destroy/delete the record
+    @portfolio_item.destroy
+
+    # Redirect
     respond_to do |format|
-      format.html { redirect_to blogs_url, notice: 'Post was removed.' }
+      format.html { redirect_to portfolios_url, notice: 'Record was removed.' }
     end
   end
-  
-  <% @blog.each do %>
-      <tr>
-        <td><%= blog.title %></td>
-        <td><%= blog.body %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Delete Post', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+
+end

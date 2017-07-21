@@ -8,7 +8,7 @@ class BlogsController < ApplicationController
     @page_title = "My Portfolio Blog"
   end
 
- # GET /blogs/1
+  # GET /blogs/1
   # GET /blogs/1.json
   def show
     @page_title = @blog.title

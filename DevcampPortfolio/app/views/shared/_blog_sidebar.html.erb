@@ -1,15 +1,23 @@
 <div class="col-sm-3 offset-sm-1 blog-sidebar">
   <div class="sidebar-module sidebar-module-inset">
     <h4>About</h4>
-    <p>Beginning of coding <em>Michael Jordan-</em>Obstacles don't have to stop you. If you run into a wall, don't turn around and give up. Figure out how to climb it, go through it, or work around it.<p>
+    <p>Michael Jordan<em>Obstacles don't have to stop you. If you run into a wall, don't turn around and give up. Figure out how to climb it, go through it, or work around it</p>
+  </div>
+
+  <div class="sidebar-module">
+    <h4>Topics</h4>
+    <% @side_bar_topics.each do |topic| %>
+      <p><%= link_to topic.title, topic_path(topic) %></p>
+    <% end %>
+  </div>
 
   <div class="sidebar-module">
     <h4>Elsewhere</h4>
     <ol class="list-unstyled social-links">
-      <li><a href="zacgallman24"><%= fa_icon "github" %></a></li>
-      <li><a href="zac_gallman24"><%= fa_icon "instagram" %></a></li>
+      <li><a href="#"><%= fa_icon "github" %></a></li>
+      <li><a href="#"><%= fa_icon "instagram" %></a></li>
       <li><a href="#"><%= fa_icon "facebook" %></a></li>
-      <li><a href="zac_gallman23"><%= fa_icon "twitter" %></a></li>
+      <li><a href="#"><%= fa_icon "twitter" %></a></li>
     </ol>
   </div>
 </div>

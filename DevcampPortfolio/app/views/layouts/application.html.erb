@@ -18,13 +18,26 @@
       <div class="site-wrapper-inner">
         <div class="cover-container">
 
+          <%= video_tag(
+              'russ.mp4',
+              id: 'background',
+              autoplay: true,
+              loop: true,
+              muted: true,
+              poster: 'wings.png'
+            )
+            %>
+
           <%= render "shared/application_nav" %>
 
           <%= yield %>
 
-         <%= render "shared/application_footer" %>
-          
+          <%= render "shared/application_footer" %>
+
+          <%= alert %>
+
           <%= source_helper("application") %>
+
 
         </div>
       </div>
